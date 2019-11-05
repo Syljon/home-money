@@ -1,42 +1,56 @@
 <div class="bg">
+  <mat-horizontal-stepper class="form" linear>
 
-<mat-horizontal-stepper class="example-form" [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form class="example-form" [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Email & Password</ng-template>
-      <mat-form-field class="example-full-width">
-        <input type="text" matInput placeholder="Email*" formControlName="email">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
+    <mat-step [stepControl]="firstFormGroup">
+      <form class="form" [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Email & Password</ng-template>
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="Email*" formControlName="email">
+        </mat-form-field>
+        <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('email')">
+        </app-error-message>
+        <mat-form-field class="full-width">
           <input type="password" matInput placeholder="Password*" formControlName="password">
-      </mat-form-field>
-      <div>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>First & Last Name</ng-template>
-      <mat-form-field class="example-full-width">
-          <input type="text" matInput placeholder="Email*" formControlName="firstName">
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-            <input type="password" matInput placeholder="Password*" formControlName="lastName">
+        <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('password')">
+        </app-error-message>
+        <div>
+          <button mat-flat-button color="primary" (click)="Next(firstFormGroup)" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>First & Last Name</ng-template>
+        <mat-form-field class="full-width">
+          <input type="text" matInput placeholder="First Name*" formControlName="firstName">
         </mat-form-field>
+
+        <app-error-message [events]="validate.asObservable()" [control]="secondFormGroup.get('firstName')">
+        </app-error-message>
+
+        <mat-form-field class="full-width">
+          <input type="password" matInput placeholder="Last Name*" formControlName="lastName">
+        </mat-form-field>
+
+        <app-error-message [events]="validate.asObservable()" [control]="secondFormGroup.get('lastName')">
+        </app-error-message>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-flat-button color="primary" (click)="Next(secondFormGroup)" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-flat-button color="primary" matStepperNext>Next</button>
+        <button mat-button>Reset</button>
       </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button  (click)="onSubmit()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
