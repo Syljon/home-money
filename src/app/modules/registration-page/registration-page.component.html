@@ -1,0 +1,42 @@
+<div class="bg">
+
+<mat-horizontal-stepper class="example-form" [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form class="example-form" [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Email & Password</ng-template>
+      <mat-form-field class="example-full-width">
+        <input type="text" matInput placeholder="Email*" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input type="password" matInput placeholder="Password*" formControlName="password">
+      </mat-form-field>
+      <div>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>First & Last Name</ng-template>
+      <mat-form-field class="example-full-width">
+          <input type="text" matInput placeholder="Email*" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input type="password" matInput placeholder="Password*" formControlName="lastName">
+        </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button  (click)="onSubmit()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+</div>
