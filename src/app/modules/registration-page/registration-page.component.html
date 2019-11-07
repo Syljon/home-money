@@ -1,15 +1,15 @@
 <div class="bg">
-  <mat-horizontal-stepper class="form" linear>
+  <mat-horizontal-stepper class="form w-100" linear>
 
     <mat-step [stepControl]="firstFormGroup">
-      <form class="form" [formGroup]="firstFormGroup">
+      <form class="form w-100" [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Email & Password</ng-template>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input type="text" matInput placeholder="Email*" formControlName="email">
         </mat-form-field>
         <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('email')">
         </app-error-message>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input type="password" matInput placeholder="Password*" formControlName="password">
         </mat-form-field>
         <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('password')">
@@ -23,14 +23,14 @@
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>First & Last Name</ng-template>
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input type="text" matInput placeholder="First Name*" formControlName="firstName">
         </mat-form-field>
 
         <app-error-message [events]="validate.asObservable()" [control]="secondFormGroup.get('firstName')">
         </app-error-message>
 
-        <mat-form-field class="full-width">
+        <mat-form-field class="w-100">
           <input type="password" matInput placeholder="Last Name*" formControlName="lastName">
         </mat-form-field>
 
@@ -45,11 +45,11 @@
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+      <ng-template matStepLabel>Create Account</ng-template>
+      Perfectly, we have all data what we need. Now you can create your account by pressing Create.
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button>Reset</button>
+        <button mat-button (click)="Create()">Create</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
