@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { switchMap, catchError, tap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { register, registerSuccess, registerFail } from 'src/app/store/user/user.actions'
+import * as UserActions from 'src/app/store/user/user.actions';
 import { Router } from '@angular/router';
 @Injectable()
 export class UserEffects {
@@ -13,21 +13,21 @@ export class UserEffects {
     private router: Router
   ) { }
 
-  login$ = createEffect(() =>
+  registration$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(register),
+      ofType(UserActions.registration),
       switchMap((action) =>
         this.auth.register(action.email, action.password, action.firstName, action.lastName)
           .pipe(
-            map((data) => registerSuccess({ accessToken: 'data.token' })),
-            catchError((error) => of(registerFail({ errorMsg: error.error })))
+            map((data) => UserActions.registrationSuccess({ accessToken: 'data.token' })),
+            catchError((error) => of(UserActions.registrationFail({ errorMsg: error.error })))
           ))
     )
   );
 
   redirectAfterLogin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerSuccess),
+      ofType(UserActions.registrationSuccess),
       tap(() =>
         this.router.navigate(["login"])
       )

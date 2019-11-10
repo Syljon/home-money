@@ -11,25 +11,20 @@ import { environment } from '../environments/environment';
 import { RegistrationPageComponent } from './modules/registration-page/registration-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SharedModule } from 'src/app/shared/shared.module'
-import {
-  MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatRippleModule,
-  MatCardModule,
-  MatStepperModule
-} from '@angular/material';
+import { MaterialModule } from 'src/app/material.module'
 import { UserStoreModule } from './store/user/';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoginPageComponent } from './modules/login-page/login-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    LoginPageComponent
   ],
   imports: [AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    AngularFireAuthModule, UserStoreModule,
   StoreModule.forRoot({}, {
     runtimeChecks: {
       strictStateImmutability: true,
@@ -45,15 +40,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
-    MatCardModule,
-    MatStepperModule,
+    MaterialModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule, 
+    FormsModule,
 
   ],
   providers: [],

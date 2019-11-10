@@ -11,11 +11,14 @@ export class AuthService {
 
   constructor(private fireAuth: AngularFireAuth) { }
 
-  register(email: string, password: string, firstName: string, lastName: string) : Observable<boolean> {
-    var observableFromPromise = from(this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
-    .then((w) => {
-      return w.user.updateProfile({displayName: firstName + " " + lastName }).then(() =>  true);
-    })) 
-    return observableFromPromise;
+  register(email: string, password: string, firstName: string, lastName: string): Observable<boolean> {
+    return from(this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((w) => {
+        return w.user.updateProfile({ displayName: firstName + " " + lastName }).then(() => true);
+      }));
+  }
+
+  login(email: string, password: string) {
+    return this.fireAuth.auth.signInWithEmailAndPassword(email, password).then(c => console.log(c)).catch(c=> console.log(c));
   }
 }

@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegistrationPageComponent } from './modules/registration-page/registration-page.component';
+import { LoginPageComponent } from './modules/login-page/login-page.component';
 
 
 const routes: Routes = [{
-  path: '',
+  path: 'registration',
   component: RegistrationPageComponent
+}, {
+  path: 'login',
+  component: LoginPageComponent
+},
+{
+  path: '**',redirectTo: 'login'
 }];
 
 @NgModule({

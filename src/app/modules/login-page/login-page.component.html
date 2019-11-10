@@ -1,0 +1,20 @@
+<div class="bg">
+    <mat-card>
+        <form class="form w-100" [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Email & Password</ng-template>
+            <mat-form-field class="w-100">
+                <input type="text" matInput placeholder="Email*" formControlName="email">
+            </mat-form-field>
+            <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('email')">
+            </app-error-message>
+            <mat-form-field class="w-100">
+                <input type="password" matInput placeholder="Password*" formControlName="password">
+            </mat-form-field>
+            <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('password')">
+            </app-error-message>
+            <div>
+                <button mat-flat-button color="primary" (click)="Next(firstFormGroup)">Next</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
