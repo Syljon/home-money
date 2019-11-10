@@ -16,12 +16,14 @@ import { UserStoreModule } from './store/user/';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoginPageComponent } from './modules/login-page/login-page.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    DashboardComponent
   ],
   imports: [AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, UserStoreModule,

@@ -24,7 +24,6 @@ export class RegistrationPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Create();
     this.firstFormGroup = this._formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -37,15 +36,15 @@ export class RegistrationPageComponent implements OnInit {
 
   Next(fg: FormGroup) {
     fg.markAllAsTouched();
-    console.log(fg);
   }
 
   Create() {
+    this.firstFormGroup.markAllAsTouched();
     this.store.dispatch(UserActions.registration({
-      email: 'syljon2@gmail.com',
-      password: 'zxczxc',
-      firstName: 'Lukasz',
-      lastName: 'Siwiec'
+      email: this.firstFormGroup.value['email'],
+      password: this.firstFormGroup.value['password'],
+      firstName: this.secondFormGroup.value['firstName'],
+      lastName: this.secondFormGroup.value['lastName'],
     }))
   }
 }

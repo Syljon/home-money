@@ -1,5 +1,5 @@
 <div class="bg">
-    <mat-card>
+    <mat-card class="form w-100">
         <form class="form w-100" [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Email & Password</ng-template>
             <mat-form-field class="w-100">
@@ -13,7 +13,7 @@
             <app-error-message [events]="validate.asObservable()" [control]="firstFormGroup.get('password')">
             </app-error-message>
             <div>
-                <button mat-flat-button color="primary" (click)="Next(firstFormGroup)">Next</button>
+                <button mat-flat-button color="primary" (click)="login()">Login</button>
             </div>
         </form>
     </mat-card>

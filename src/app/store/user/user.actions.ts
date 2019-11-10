@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { User } from 'firebase';
 
 export const registration = createAction(
   '[Registration Form] Registration',
@@ -7,7 +8,7 @@ export const registration = createAction(
 
 export const registrationSuccess = createAction(
   '[Auth API] Registration Success',
-  props<{ accessToken: string; }>()
+  props<{ register: boolean}>()
 );
 
 export const registrationFail = createAction(
@@ -22,7 +23,7 @@ export const login = createAction(
 
 export const loginSuccess = createAction(
   '[Auth API] Login Success',
-  props<{ accessToken: string; }>()
+  props<{ user: User; }>()
 );
 
 export const loginFail = createAction(

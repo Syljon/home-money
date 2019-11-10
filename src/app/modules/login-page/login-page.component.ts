@@ -1,8 +1,9 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/store/user/user.states';
+import * as UserActions from 'src/app/store/user/user.actions'
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   firstFormGroup: FormGroup;
   validate: Subject<void> = new Subject<void>();
 
-  constructor(private _formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private store: Store<User>) {
   }
 
   ngOnChanges() {
@@ -21,19 +22,18 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.login('syljon2@gmail.com','zxczxc');
-    this.firstFormGroup = this._formBuilder.group({
+    this.firstFormGroup = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
-  Next(fg: FormGroup) {
-    fg.markAllAsTouched();
-    console.log(fg);
-  }
-
-  Create() {
-    
+  login() {
+    this.firstFormGroup.markAllAsTouched();
+    if(this.firstFormGroup.invalid) return;
+    this.store.dispatch(UserActions.login({
+      email: this.firstFormGroup.value['email'],
+      password: this.firstFormGroup.value['password']
+    }));
   }
 }
