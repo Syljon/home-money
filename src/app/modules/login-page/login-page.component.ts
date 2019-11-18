@@ -1,9 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { User } from 'src/app/store/user/user.states';
-import * as UserActions from 'src/app/store/user/user.actions'
 
 @Component({
   selector: 'app-login-page',
@@ -14,7 +11,7 @@ export class LoginPageComponent implements OnInit {
   firstFormGroup: FormGroup;
   validate: Subject<void> = new Subject<void>();
 
-  constructor(private formBuilder: FormBuilder, private store: Store<User>) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnChanges() {
@@ -31,9 +28,6 @@ export class LoginPageComponent implements OnInit {
   login() {
     this.firstFormGroup.markAllAsTouched();
     if(this.firstFormGroup.invalid) return;
-    this.store.dispatch(UserActions.login({
-      email: this.firstFormGroup.value['email'],
-      password: this.firstFormGroup.value['password']
-    }));
+
   }
 }
