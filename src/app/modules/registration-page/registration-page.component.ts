@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { Registration } from 'src/app/store/user.actions';
+import { UserState } from 'src/app/store/user.states';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-registration-page',
@@ -14,7 +17,7 @@ export class RegistrationPageComponent implements OnInit {
   secondFormGroup: FormGroup;
   validate: Subject<void> = new Subject<void>();
 
-  constructor(private _formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
+  constructor(private _formBuilder: FormBuilder,private store: Store<UserState>, private auth: AuthService, private router: Router) {
   }
 
   ngOnChanges() {
@@ -38,11 +41,11 @@ export class RegistrationPageComponent implements OnInit {
 
   Create() {
     this.firstFormGroup.markAllAsTouched();
-    // this.store.dispatch(UserActions.registration({
-    //   email: this.firstFormGroup.value['email'],
-    //   password: this.firstFormGroup.value['password'],
-    //   firstName: this.secondFormGroup.value['firstName'],
-    //   lastName: this.secondFormGroup.value['lastName'],
-    // }))
+    this.store.dispatch(Registration({
+      email: this.firstFormGroup.value['email'],
+      password: this.firstFormGroup.value['password'],
+      firstName: this.secondFormGroup.value['firstName'],
+      lastName: this.secondFormGroup.value['lastName'],
+    }))
   }
 }
