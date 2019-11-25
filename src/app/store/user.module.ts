@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserEffects } from './user.effects';
 import { reducer } from './user.reducer';
+import { UserEffects } from './user.effects';
 
-export const userFeatureKey = 'user';
+export const parkingSpaceOccupancyFeatureKey = 'parking-space-occupancy';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature(userFeatureKey, reducer),
+    StoreModule.forFeature(parkingSpaceOccupancyFeatureKey, reducer),
     EffectsModule.forFeature([UserEffects])
   ],
 })

@@ -1,20 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MaterialModule } from 'src/app/material.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { UserStoreModule } from './store';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
+
+import { AppComponent } from './app.component';
 import { RegistrationPageComponent } from './modules/registration-page/registration-page.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { SharedModule } from 'src/app/shared/shared.module'
-import { MaterialModule } from 'src/app/material.module'
-import { UserStoreModule } from './store/user/';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { LoginPageComponent } from './modules/login-page/login-page.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
@@ -25,9 +27,7 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     LoginPageComponent,
     DashboardComponent
   ],
-  imports: [AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, UserStoreModule,
-  StoreModule.forRoot({}, {
+  imports: [StoreModule.forRoot({}, {
     runtimeChecks: {
       strictStateImmutability: true,
       strictActionImmutability: true
@@ -38,7 +38,9 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     maxAge: 50,
     logOnly: environment.production
   }),
-  EffectsModule.forRoot([]),
+    UserStoreModule,
+  AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -46,6 +48,8 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
+  EffectsModule.forRoot([]),
 
   ],
   providers: [],
